@@ -135,3 +135,47 @@ export async function deleteProduct(productId) {
   }
   return res.json()
 }
+
+export async function updateCategory(categoryId, updates) {
+  const res = await fetch(`${BASE_URL}/categories/${categoryId}`, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(updates),
+  })
+  if (!res.ok) {
+    const err = await res.json()
+    throw new Error(err.detail || 'Kategori güncellenemedi')
+  }
+  return res.json()
+}
+
+export async function deleteCategory(categoryId) {
+  const res = await fetch(`${BASE_URL}/categories/${categoryId}`, { method: 'DELETE' })
+  if (!res.ok) {
+    const err = await res.json()
+    throw new Error(err.detail || 'Kategori silinemedi')
+  }
+  return res.json()
+}
+
+export async function updateSupplier(supplierId, updates) {
+  const res = await fetch(`${BASE_URL}/suppliers/${supplierId}`, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(updates),
+  })
+  if (!res.ok) {
+    const err = await res.json()
+    throw new Error(err.detail || 'Tedarikçi güncellenemedi')
+  }
+  return res.json()
+}
+
+export async function deleteSupplier(supplierId) {
+  const res = await fetch(`${BASE_URL}/suppliers/${supplierId}`, { method: 'DELETE' })
+  if (!res.ok) {
+    const err = await res.json()
+    throw new Error(err.detail || 'Tedarikçi silinemedi')
+  }
+  return res.json()
+}
