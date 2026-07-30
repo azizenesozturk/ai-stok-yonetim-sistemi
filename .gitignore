@@ -1,0 +1,15 @@
+cat > .gitignore << 'EOF'
+# Node / Frontend
+node_modules/
+dist/
+*.log
+
+# Backend / Python
+backend/venv/
+backend/__pycache__/
+backend/*.pyc
+backend/.env
+
+# Genel
+.DS_Store
+EOF

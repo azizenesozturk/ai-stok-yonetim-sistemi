@@ -1,0 +1,95 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #7E36E2;
+  --color-background: #0B0B0B;
+  --color-surface: #0F2A2A;
+  --color-accent-pink: #FF008E;
+  --color-accent-magenta: #F72585;
+  --color-success: #00BFA6;
+  --color-warning: #F5CE0A;
+  --color-error: #E4234B;
+  --color-deep-purple: #3F0257;
+  --color-navy-accent: #011735;
+  --color-secondary-accent: #C7F022;
+}
+
+body {
+  background-color: var(--color-background);
+}
+
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #7E36E2;
+  --color-background: #0B0B0B;
+  --color-surface: #0F2A2A;
+  --color-accent-pink: #FF008E;
+  --color-accent-magenta: #F72585;
+  --color-success: #00BFA6;
+  --color-warning: #F5CE0A;
+  --color-error: #E4234B;
+  --color-deep-purple: #3F0257;
+  --color-navy-accent: #011735;
+  --color-secondary-accent: #C7F022;
+}
+
+body {
+  background-color: var(--color-background);
+  background-image:
+    radial-gradient(ellipse 80% 50% at 20% -10%, rgba(126, 54, 226, 0.15), transparent),
+    radial-gradient(ellipse 60% 40% at 90% 10%, rgba(247, 37, 133, 0.08), transparent);
+  background-attachment: fixed;
+  min-height: 100vh;
+}
+
+/* Özel glow efektleri */
+.glow-primary {
+  box-shadow: 0 0 24px rgba(126, 54, 226, 0.25), 0 0 1px rgba(126, 54, 226, 0.5);
+}
+
+.glow-success {
+  box-shadow: 0 0 20px rgba(0, 191, 166, 0.2);
+}
+
+.glow-warning {
+  box-shadow: 0 0 20px rgba(245, 206, 10, 0.15);
+}
+
+.glow-error {
+  box-shadow: 0 0 20px rgba(228, 35, 75, 0.2);
+}
+
+/* Kaydırma çubuğu (scrollbar) stilini de temaya uyduralım */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(126, 54, 226, 0.3);
+  border-radius: 8px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(126, 54, 226, 0.5);
+}
+
+/* Fade-in animasyonu - sayfa geçişlerinde kullanacağız */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.4s ease-out;
+}
+
+@keyframes modalIn {
+  from { opacity: 0; transform: scale(0.96) translateY(8px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.animate-modal-in {
+  animation: modalIn 0.2s ease-out;
+}
