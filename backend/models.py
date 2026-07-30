@@ -55,7 +55,7 @@ class Product(Base):
 
     category = relationship("Category", back_populates="products")
     supplier = relationship("Supplier", back_populates="products")
-    movements = relationship("StockMovement", back_populates="product")
+    movements = relationship("StockMovement", back_populates="product", cascade="all, delete-orphan")
 
 
 class StockMovement(Base):

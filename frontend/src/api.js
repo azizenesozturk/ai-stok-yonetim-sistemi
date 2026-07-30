@@ -111,3 +111,27 @@ export async function getAllAnomalies() {
   if (!res.ok) throw new Error('Anomali verisi alınamadı')
   return res.json()
 }
+
+export async function updateProduct(productId, updates) {
+  const res = await fetch(`${BASE_URL}/products/${productId}`, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(updates),
+  })
+  if (!res.ok) {
+    const err = await res.json()
+    throw new Error(err.detail || 'Ürün güncellenemedi')
+  }
+  return res.json()
+}
+
+export async function deleteProduct(productId) {
+  const res = await fetch(`${BASE_URL}/products/${productId}`, {
+    method: 'DELETE',
+  })
+  if (!res.ok) {
+    const err = await res.json()
+    throw new Error(err.detail || 'Ürün silinemedi')
+  }
+  return res.json()
+}
