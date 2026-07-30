@@ -54,7 +54,7 @@ function Products() {
         />
       </div>
 
-      <div className="bg-surface/40 border border-primary/10 rounded-2xl overflow-hidden">
+      <div className="bg-surface/40 border border-primary/10 rounded-2xl overflow-x-auto">
         <table className="w-full text-sm">
           <thead>
             <tr className="border-b border-primary/10 text-white/40 text-left">

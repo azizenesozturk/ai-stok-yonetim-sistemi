@@ -41,7 +41,7 @@ function Dashboard() {
 
       {!loading && !error && (
         <>
-          <div className="grid grid-cols-4 gap-4 mb-6">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
             <StatCard icon={Package} label="Toplam Ürün" value={products.length} accent="primary" />
             <StatCard icon={AlertTriangle} label="Kritik Stok" value={lowStock.length} accent="warning" />
             <StatCard

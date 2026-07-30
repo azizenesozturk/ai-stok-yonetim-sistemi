@@ -137,7 +137,7 @@ function ProductDetail() {
         </div>
       )}
 
-      <div className="grid grid-cols-3 gap-4 mb-6">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
         <div className="bg-surface/40 border border-primary/10 rounded-2xl p-5">
           <p className="text-white/40 text-xs mb-1">Kritik Stok Eşiği</p>
           <p className="text-xl font-bold text-white">{product.min_stock_level} adet</p>
