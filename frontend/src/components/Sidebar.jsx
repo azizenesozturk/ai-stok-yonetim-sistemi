@@ -1,5 +1,6 @@
 import { Link, useLocation } from 'react-router-dom'
-import { LayoutDashboard, Package, Boxes, Truck, ArrowLeftRight, Settings, X } from 'lucide-react'
+import { LayoutDashboard, Package, Boxes, Truck, ArrowLeftRight, Settings, X, LogOut } from 'lucide-react'
+import { useAuth } from '../context/AuthContext'
 
 const menuItems = [
   { icon: LayoutDashboard, label: 'Panel', path: '/' },
@@ -12,6 +13,7 @@ const menuItems = [
 
 function Sidebar({ isOpen, onClose }) {
   const location = useLocation()
+  const { user, logout } = useAuth()
 
   return (
     <>
@@ -62,8 +64,23 @@ function Sidebar({ isOpen, onClose }) {
         </nav>
 
         <div className="p-4 border-t border-primary/10">
-          <p className="text-xs text-white/30">v0.1.0 · Portföy Projesi</p>
-        </div>
+  {user && (
+    <div className="flex items-center justify-between mb-3 px-1">
+      <div>
+        <p className="text-sm text-white/80 font-medium">{user.username}</p>
+        <p className="text-xs text-white/30">{user.email}</p>
+      </div>
+      <button
+        onClick={logout}
+        className="p-1.5 rounded-lg text-white/40 hover:text-error hover:bg-white/5 transition-colors"
+        title="Çıkış Yap"
+      >
+        <LogOut size={16} />
+      </button>
+    </div>
+  )}
+  <p className="text-xs text-white/30">v0.1.0 · Portföy Projesi</p>
+</div>
       </aside>
     </>
   )

@@ -1,19 +1,24 @@
 const BASE_URL = 'http://127.0.0.1:8000'
 
+function authHeaders() {
+  const token = localStorage.getItem('token')
+  return token ? { Authorization: `Bearer ${token}` } : {}
+}
+
 export async function getProducts() {
-  const res = await fetch(`${BASE_URL}/products/`)
+  const res = await fetch(`${BASE_URL}/products/`, { headers: { ...authHeaders() } })
   if (!res.ok) throw new Error('Ürünler alınamadı')
   return res.json()
 }
 
 export async function getLowStockProducts() {
-  const res = await fetch(`${BASE_URL}/products/?low_stock_only=true`)
+  const res = await fetch(`${BASE_URL}/products/?low_stock_only=true`, { headers: { ...authHeaders() } })
   if (!res.ok) throw new Error('Kritik stok verisi alınamadı')
   return res.json()
 }
 
 export async function getCategories() {
-  const res = await fetch(`${BASE_URL}/categories/`)
+  const res = await fetch(`${BASE_URL}/categories/`, { headers: { ...authHeaders() } })
   if (!res.ok) throw new Error('Kategoriler alınamadı')
   return res.json()
 }
@@ -21,7 +26,7 @@ export async function getCategories() {
 export async function createProduct(product) {
   const res = await fetch(`${BASE_URL}/products/`, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    headers: { 'Content-Type': 'application/json', ...authHeaders() },
     body: JSON.stringify(product),
   })
   if (!res.ok) {
@@ -32,13 +37,13 @@ export async function createProduct(product) {
 }
 
 export async function getSuppliers() {
-  const res = await fetch(`${BASE_URL}/suppliers/`)
+  const res = await fetch(`${BASE_URL}/suppliers/`, { headers: { ...authHeaders() } })
   if (!res.ok) throw new Error('Tedarikçiler alınamadı')
   return res.json()
 }
 
 export async function getStockMovements() {
-  const res = await fetch(`${BASE_URL}/stock-movements/`)
+  const res = await fetch(`${BASE_URL}/stock-movements/`, { headers: { ...authHeaders() } })
   if (!res.ok) throw new Error('Stok hareketleri alınamadı')
   return res.json()
 }
@@ -46,7 +51,7 @@ export async function getStockMovements() {
 export async function createStockMovement(movement) {
   const res = await fetch(`${BASE_URL}/stock-movements/`, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    headers: { 'Content-Type': 'application/json', ...authHeaders() },
     body: JSON.stringify(movement),
   })
   if (!res.ok) {
@@ -59,7 +64,7 @@ export async function createStockMovement(movement) {
 export async function createCategory(category) {
   const res = await fetch(`${BASE_URL}/categories/`, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    headers: { 'Content-Type': 'application/json', ...authHeaders() },
     body: JSON.stringify(category),
   })
   if (!res.ok) {
@@ -72,7 +77,7 @@ export async function createCategory(category) {
 export async function createSupplier(supplier) {
   const res = await fetch(`${BASE_URL}/suppliers/`, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    headers: { 'Content-Type': 'application/json', ...authHeaders() },
     body: JSON.stringify(supplier),
   })
   if (!res.ok) {
@@ -83,31 +88,31 @@ export async function createSupplier(supplier) {
 }
 
 export async function getReorderSuggestions() {
-  const res = await fetch(`${BASE_URL}/forecast/`)
+  const res = await fetch(`${BASE_URL}/forecast/`, { headers: { ...authHeaders() } })
   if (!res.ok) throw new Error('AI önerileri alınamadı')
   return res.json()
 }
 
 export async function getProductForecast(productId, days = 7) {
-  const res = await fetch(`${BASE_URL}/forecast/${productId}?days=${days}`)
+  const res = await fetch(`${BASE_URL}/forecast/${productId}?days=${days}`, { headers: { ...authHeaders() } })
   if (!res.ok) throw new Error('Tahmin verisi alınamadı')
   return res.json()
 }
 
 export async function getSalesHistory(productId, days = 30) {
-  const res = await fetch(`${BASE_URL}/forecast/${productId}/history?days=${days}`)
+  const res = await fetch(`${BASE_URL}/forecast/${productId}/history?days=${days}`, { headers: { ...authHeaders() } })
   if (!res.ok) throw new Error('Satış geçmişi alınamadı')
   return res.json()
 }
 
 export async function getProduct(productId) {
-  const res = await fetch(`${BASE_URL}/products/${productId}`)
+  const res = await fetch(`${BASE_URL}/products/${productId}`, { headers: { ...authHeaders() } })
   if (!res.ok) throw new Error('Ürün bulunamadı')
   return res.json()
 }
 
 export async function getAllAnomalies() {
-  const res = await fetch(`${BASE_URL}/forecast/anomalies/all`)
+  const res = await fetch(`${BASE_URL}/forecast/anomalies/all`, { headers: { ...authHeaders() } })
   if (!res.ok) throw new Error('Anomali verisi alınamadı')
   return res.json()
 }
@@ -115,7 +120,7 @@ export async function getAllAnomalies() {
 export async function updateProduct(productId, updates) {
   const res = await fetch(`${BASE_URL}/products/${productId}`, {
     method: 'PUT',
-    headers: { 'Content-Type': 'application/json' },
+    headers: { 'Content-Type': 'application/json', ...authHeaders() },
     body: JSON.stringify(updates),
   })
   if (!res.ok) {
@@ -128,6 +133,7 @@ export async function updateProduct(productId, updates) {
 export async function deleteProduct(productId) {
   const res = await fetch(`${BASE_URL}/products/${productId}`, {
     method: 'DELETE',
+    headers: { ...authHeaders() },
   })
   if (!res.ok) {
     const err = await res.json()
@@ -139,7 +145,7 @@ export async function deleteProduct(productId) {
 export async function updateCategory(categoryId, updates) {
   const res = await fetch(`${BASE_URL}/categories/${categoryId}`, {
     method: 'PUT',
-    headers: { 'Content-Type': 'application/json' },
+    headers: { 'Content-Type': 'application/json', ...authHeaders() },
     body: JSON.stringify(updates),
   })
   if (!res.ok) {
@@ -150,7 +156,10 @@ export async function updateCategory(categoryId, updates) {
 }
 
 export async function deleteCategory(categoryId) {
-  const res = await fetch(`${BASE_URL}/categories/${categoryId}`, { method: 'DELETE' })
+  const res = await fetch(`${BASE_URL}/categories/${categoryId}`, {
+    method: 'DELETE',
+    headers: { ...authHeaders() },
+  })
   if (!res.ok) {
     const err = await res.json()
     throw new Error(err.detail || 'Kategori silinemedi')
@@ -161,7 +170,7 @@ export async function deleteCategory(categoryId) {
 export async function updateSupplier(supplierId, updates) {
   const res = await fetch(`${BASE_URL}/suppliers/${supplierId}`, {
     method: 'PUT',
-    headers: { 'Content-Type': 'application/json' },
+    headers: { 'Content-Type': 'application/json', ...authHeaders() },
     body: JSON.stringify(updates),
   })
   if (!res.ok) {
@@ -172,7 +181,10 @@ export async function updateSupplier(supplierId, updates) {
 }
 
 export async function deleteSupplier(supplierId) {
-  const res = await fetch(`${BASE_URL}/suppliers/${supplierId}`, { method: 'DELETE' })
+  const res = await fetch(`${BASE_URL}/suppliers/${supplierId}`, {
+    method: 'DELETE',
+    headers: { ...authHeaders() },
+  })
   if (!res.ok) {
     const err = await res.json()
     throw new Error(err.detail || 'Tedarikçi silinemedi')

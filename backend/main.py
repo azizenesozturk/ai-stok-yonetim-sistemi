@@ -3,7 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from database import engine, Base
 import models
 from routers import categories, suppliers, products, stock_movements
-from routers import categories, suppliers, products, stock_movements, forecasting
+from routers import categories, suppliers, products, stock_movements, forecasting, auth as auth_router
 
 Base.metadata.create_all(bind=engine)
 
@@ -20,6 +20,7 @@ app.include_router(suppliers.router)
 app.include_router(products.router)
 app.include_router(stock_movements.router)
 app.include_router(forecasting.router)
+app.include_router(auth_router.router)
 
 @app.get("/")
 def read_root():
