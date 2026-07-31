@@ -10,7 +10,10 @@ Base.metadata.create_all(bind=engine)
 app = FastAPI(title="AI Stok Yönetim Sistemi")
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173"],
+    allow_origins=[
+        "http://localhost:5173",
+        "https://ai-stok-yonetim-sistemi.vercel.app",
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
