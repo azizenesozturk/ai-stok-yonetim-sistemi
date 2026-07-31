@@ -42,3 +42,16 @@ def login(form_data: OAuth2PasswordRequestForm = Depends(), db: Session = Depend
 @router.get("/me", response_model=schemas.UserOut)
 def get_me(current_user: models.User = Depends(auth.get_current_user)):
     return current_user
+
+@router.put("/change-password")
+def change_password(
+    data: schemas.PasswordChange,
+    current_user: models.User = Depends(auth.get_current_user),
+    db: Session = Depends(get_db),
+):
+    if not auth.verify_password(data.current_password, current_user.hashed_password):
+        raise HTTPException(status_code=400, detail="Mevcut şifre yanlış")
+
+    current_user.hashed_password = auth.hash_password(data.new_password)
+    db.commit()
+    return {"mesaj": "Şifre başarıyla güncellendi"}

@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { LogIn, UserPlus } from 'lucide-react'
 import { useAuth } from '../context/AuthContext'
+import logo from '../assets/logo.png'
 
 function Login() {
   const [mode, setMode] = useState('login') // 'login' | 'register'
@@ -33,10 +34,12 @@ function Login() {
     <div className="min-h-screen bg-background flex items-center justify-center p-4">
       <div className="w-full max-w-sm">
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold tracking-tight bg-gradient-to-r from-primary to-accent-magenta bg-clip-text text-transparent">
-            StokAI
-          </h1>
-          <p className="text-white/40 text-sm mt-1">Envanter Yönetimi</p>
+          <div className="flex items-center justify-center gap-3">
+  <img src={logo} alt="Logo" className="w-16 h-16 object-contain" />
+  <h1 className="text-5xl font-bold tracking-tight" style={{ color: '#7BA7AF' }}>
+    DenDen
+  </h1>
+</div>
         </div>
 
         <div className="bg-surface/40 backdrop-blur-xl border border-primary/10 rounded-2xl p-6 shadow-[0_0_30px_-8px_rgba(126,54,226,0.2)]">

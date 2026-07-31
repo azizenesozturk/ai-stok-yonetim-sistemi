@@ -1,6 +1,7 @@
 import { Link, useLocation } from 'react-router-dom'
 import { LayoutDashboard, Package, Boxes, Truck, ArrowLeftRight, Settings, X, LogOut } from 'lucide-react'
 import { useAuth } from '../context/AuthContext'
+import logo from '../assets/logo.png'
 
 const menuItems = [
   { icon: LayoutDashboard, label: 'Panel', path: '/' },
@@ -31,10 +32,13 @@ function Sidebar({ isOpen, onClose }) {
       >
         <div className="p-6 border-b border-primary/10 flex items-center justify-between">
           <div>
-            <h1 className="text-xl font-bold tracking-tight bg-gradient-to-r from-primary to-accent-magenta bg-clip-text text-transparent">
-              StokAI
-            </h1>
-            <p className="text-xs text-white/40 mt-1">Envanter Yönetimi</p>
+            <div className="flex items-center gap-3">
+  <img src={logo} alt="Logo" className="w-14 h-14 object-contain" />
+  <h1 className="text-3xl font-bold tracking-tight" style={{ color: '#7BA7AF' }}>
+    DenDen
+  </h1>
+</div>
+            
           </div>
           <button onClick={onClose} className="md:hidden text-white/40 hover:text-white">
             <X size={20} />

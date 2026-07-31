@@ -10,6 +10,7 @@ import Suppliers from './pages/Suppliers'
 import Movements from './pages/Movements'
 import Login from './pages/Login'
 import ProtectedRoute from './components/ProtectedRoute'
+import Settings from './pages/Settings'
 
 function AppLayout({ children }) {
   const [sidebarOpen, setSidebarOpen] = useState(false)
@@ -34,6 +35,7 @@ function App() {
           <ProtectedRoute>
             <AppLayout>
               <Routes>
+                <Route path="/settings" element={<Settings />} />
                 <Route path="/" element={<Dashboard />} />
                 <Route path="/products" element={<Products />} />
                 <Route path="/products/:id" element={<ProductDetail />} />

@@ -191,3 +191,16 @@ export async function deleteSupplier(supplierId) {
   }
   return res.json()
 }
+
+export async function changePassword(currentPassword, newPassword) {
+  const res = await fetch(`${BASE_URL}/auth/change-password`, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json', ...authHeaders() },
+    body: JSON.stringify({ current_password: currentPassword, new_password: newPassword }),
+  })
+  if (!res.ok) {
+    const err = await res.json()
+    throw new Error(err.detail || 'Şifre değiştirilemedi')
+  }
+  return res.json()
+}

@@ -31,6 +31,15 @@ Yapay zeka tabanlı talep tahmini, otomatik sipariş önerisi ve anomali tespiti
 
 *(Buraya dashboard, ürün detay grafiği gibi ekran görüntüleri eklenecek)*
 
+## 🔑 Demo Hesabı
+
+Projeyi canlı olarak incelemek için hazır bir demo hesabı kullanabilirsiniz (gerçekçi test verisiyle doldurulmuştur):
+
+- **Kullanıcı Adı:** `demo`
+- **Şifre:** `demo1234`
+
+*(Not: Bu demo amaçlı paylaşılan bir hesaptır, gerçek/hassas veri içermez. Dilerseniz kendi hesabınızı da oluşturabilirsiniz.)*
+
 ## 🚀 Kurulum
 
 ### Backend
