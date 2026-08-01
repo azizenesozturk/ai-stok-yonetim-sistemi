@@ -3,7 +3,13 @@ cat > README.md << 'EOF'
 
 Yapay zeka tabanlı talep tahmini, otomatik sipariş önerisi ve anomali tespiti içeren, modern bir envanter yönetim sistemi.
 
-![Durum](https://img.shields.io/badge/durum-geliştirme%20aşamasında-yellow)
+![Durum](https://img.shields.io/badge/durum-yayında-brightgreen)
+
+🔗 **Canlı Demo:** [ai-stok-yonetim-sistemi.vercel.app](https://ai-stok-yonetim-sistemi.vercel.app)
+
+**Demo Hesabı:** kullanıcı adı `demo`, şifre `demo1234`
+
+*(Not: Ücretsiz sunucu barındırma kullanıldığı için, uzun süre kullanılmayınca sunucu "uyku" moduna geçer — ilk açılış 30-50 saniye kadar sürebilir, sabırlı olun 🙂)*
 
 ## ✨ Özellikler
 
@@ -12,7 +18,8 @@ Yapay zeka tabanlı talep tahmini, otomatik sipariş önerisi ve anomali tespiti
 - 🧠 **AI Talep Tahmini** — Geçmiş satış verisine dayalı, trend analizli günlük/haftalık tahmin
 - 📈 **Otomatik Sipariş Önerisi** — Tahmin + mevcut stok + tedarikçi teslimat süresine göre "ne zaman, ne kadar sipariş verilmeli" önerisi
 - 🚨 **Anomali Tespiti** — İstatistiksel (z-skoru) yöntemle beklenmedik satış hareketlerini yakalama
-- 🎨 **Modern, Premium Arayüz** — Koyu tema, glassmorphism, neon vurgular
+- 🔐 **JWT Tabanlı Kimlik Doğrulama** — Kayıt, giriş, korumalı sayfalar
+- 🎨 **Modern, Premium Arayüz** — Koyu tema, glassmorphism, neon vurgular, mobil uyumlu
 
 ## 🛠️ Teknoloji Yığını
 
@@ -20,6 +27,7 @@ Yapay zeka tabanlı talep tahmini, otomatik sipariş önerisi ve anomali tespiti
 - FastAPI (Python)
 - PostgreSQL + SQLAlchemy (ORM)
 - Pandas / NumPy (tahmin motoru)
+- JWT (python-jose) + bcrypt (kimlik doğrulama)
 
 **Frontend:**
 - React (Vite)
@@ -27,20 +35,16 @@ Yapay zeka tabanlı talep tahmini, otomatik sipariş önerisi ve anomali tespiti
 - Recharts (veri görselleştirme)
 - React Router
 
+**Deployment:**
+- Frontend → Vercel
+- Backend → Render
+- Veritabanı → Neon (Serverless PostgreSQL)
+
 ## 📸 Ekran Görüntüleri
 
 *(Buraya dashboard, ürün detay grafiği gibi ekran görüntüleri eklenecek)*
 
-## 🔑 Demo Hesabı
-
-Projeyi canlı olarak incelemek için hazır bir demo hesabı kullanabilirsiniz (gerçekçi test verisiyle doldurulmuştur):
-
-- **Kullanıcı Adı:** `demo`
-- **Şifre:** `demo1234`
-
-*(Not: Bu demo amaçlı paylaşılan bir hesaptır, gerçek/hassas veri içermez. Dilerseniz kendi hesabınızı da oluşturabilirsiniz.)*
-
-## 🚀 Kurulum
+## 🚀 Yerel Kurulum
 
 ### Backend
 
@@ -49,7 +53,7 @@ cd backend
 python -m venv venv
 source venv/Scripts/activate  # Windows
 pip install -r requirements.txt
-# .env dosyasında DATABASE_URL ayarlanmalı
+# .env dosyasında DATABASE_URL ve SECRET_KEY ayarlanmalı
 uvicorn main:app --reload
 \`\`\`
 
@@ -80,11 +84,13 @@ ai-stok-yonetim/
 │   ├── models.py            # SQLAlchemy veritabanı modelleri
 │   ├── schemas.py           # Pydantic şemaları
 │   ├── forecasting.py       # AI tahmin/öneri/anomali motoru
+│   ├── auth.py              # JWT ve şifre işlemleri
 │   └── routers/             # API endpoint'leri
 └── frontend/
     └── src/
         ├── pages/           # Dashboard, Ürünler, Kategoriler vb.
         ├── components/      # Yeniden kullanılabilir UI bileşenleri
+        ├── context/         # Auth context (kullanıcı oturumu)
         └── api.js           # Backend API çağrıları
 \`\`\`
 
