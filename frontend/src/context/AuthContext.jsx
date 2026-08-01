@@ -9,24 +9,25 @@ export function AuthProvider({ children }) {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    if (token) {
-      fetch(`${BASE_URL}/auth/me`, {
-        headers: { Authorization: `Bearer ${token}` },
+  if (token) {
+    setLoading(true)
+    fetch(`${BASE_URL}/auth/me`, {
+      headers: { Authorization: `Bearer ${token}` },
+    })
+      .then((res) => {
+        if (!res.ok) throw new Error('Geçersiz oturum')
+        return res.json()
       })
-        .then((res) => {
-          if (!res.ok) throw new Error('Geçersiz oturum')
-          return res.json()
-        })
-        .then(setUser)
-        .catch(() => {
-          setToken(null)
-          localStorage.removeItem('token')
-        })
-        .finally(() => setLoading(false))
-    } else {
-      setLoading(false)
-    }
-  }, [token])
+      .then(setUser)
+      .catch(() => {
+        setToken(null)
+        localStorage.removeItem('token')
+      })
+      .finally(() => setLoading(false))
+  } else {
+    setLoading(false)
+  }
+}, [token])
 
   async function login(username, password) {
     const formData = new URLSearchParams()
